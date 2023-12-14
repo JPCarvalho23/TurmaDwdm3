@@ -1,0 +1,40 @@
+﻿@page
+@model TurmaDwdm3.Pages.Inscricoes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Inscricao</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Inscricao.InscricaoID" />
+            <div class="form-group">
+                <label asp-for="Inscricao.UcurricularID" class="control-label"></label>
+                <select asp-for="Inscricao.UcurricularID" class="form-control" asp-items="ViewBag.UcurricularID"></select>
+                <span asp-validation-for="Inscricao.UcurricularID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inscricao.AlunoID" class="control-label"></label>
+                <select asp-for="Inscricao.AlunoID" class="form-control" asp-items="ViewBag.AlunoID"></select>
+                <span asp-validation-for="Inscricao.AlunoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@page
+@model TurmaDwdm3.Pages.UCurriculares.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Unidades Curriculares</h1>
+
+<p>
+    <a asp-page="Create">Nova UC</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ucurricular[0].NomeUc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ucurricular[0].Nrcreditos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Ucurricular) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeUc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nrcreditos)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.UcurricularID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.UcurricularID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.UcurricularID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

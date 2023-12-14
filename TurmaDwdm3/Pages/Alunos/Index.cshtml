@@ -1,0 +1,74 @@
+﻿@page
+@model TurmaDwdm3.Pages.Alunos.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alunos</h1>
+
+<p>
+    <a asp-page="Create">Novo Aluno</a>
+</p>
+<br />
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Procurar pelo nome(s):
+            <input type="text" name="filtroTexto" value="@Model.FiltroCorrente" />
+            <input type="submit" value="Filtrar" class="btn btn-default" />
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-ordenacao="@Model.OrdenacaoNome"
+                asp-route-filtroCorrente="@Model.FiltroCorrente">
+                    @Html.DisplayNameFor(model => model.Alunos[0].NomeCompleto)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alunos[0].DataInscricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Alunos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInscricao)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.AlunoID">Editar</a> |
+                    <a asp-page="./Details" asp-route-id="@item.AlunoID">Detalhes</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.AlunoID">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Alunos.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Alunos.HasNextPage ? "disabled" : "";
+}
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.OrdenacaoCorrente"
+   asp-route-pageIndex="@(Model.Alunos.PaginaIndex - 1)"
+   asp-route-currentFilter="@Model.FiltroCorrente"
+   class="btn btn-default @prevDisabled">
+    Anterior
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.OrdenacaoCorrente"
+   asp-route-pageIndex="@(Model.Alunos.PaginaIndex + 1)"
+   asp-route-currentFilter="@Model.FiltroCorrente"
+   class="btn btn-default @nextDisabled">
+    Próximo
+</a>
